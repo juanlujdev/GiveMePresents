@@ -80,6 +80,10 @@
       <DependentUpon>GivemePresentDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\GiftedPersonRepository.cs" />
+    <Compile Include="Repository\GiftRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="User.cs">
       <DependentUpon>GivemePresentDB.tt</DependentUpon>
     </Compile>
