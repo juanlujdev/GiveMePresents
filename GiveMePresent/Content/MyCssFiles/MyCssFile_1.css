@@ -1,0 +1,84 @@
+﻿body {
+    background: url(../../Fonts/Images/regaloHome2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.personalForm {
+    background: rgba(0,0,0,.3);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.568);
+    color: white;
+}
+
+.elementsCenter {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+}
+
+.form-control {
+    background: rgba(0,0,0,.3) !important;
+    border-style: none;
+    transition: 0.5s ease-in;
+    color: white !important;
+    outline: none;
+    box-shadow:none;
+}
+
+    .form-control:focus{
+        background:none;
+    }
+    .form-control : placeholder {
+        color: white !important;
+        transition: 0.5s ease-in;
+    }
+
+.personalButton {
+    background-color: #E59C4C !important;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 700 !important;
+    color: white !important;
+    box-shadow: 0 0 30px rgba(0,0,0,0.568);
+    transition: 0.5s ease-in;
+}
+
+    .personalButton:hover {
+        color: white;
+    }
+
+.forgot{
+    color:white;
+    text-decoration-style:none;
+    text-decoration-line:none;
+}
+    .forgot:hover {
+        color: white;
+        text-decoration-style: none;
+        text-decoration-line: none;
+        cursor:pointer;
+    }
+
+.create {
+    color: white ;
+    text-decoration-style: none;
+    text-decoration-line: none;
+    font-size: 20px;
+    font-weight: 700 !important;
+    border: 2px solid white;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,.3) !important;
+}
+
+    .create:hover {
+        color: white;
+        text-decoration-style: none;
+        text-decoration-line: none;
+        cursor: pointer;
+    }

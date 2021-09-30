@@ -1,39 +1,39 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <style>
-        .back {
-            background: url(../../Fonts/Images/regaloHome2.jpg) no-repeat center center fixed #000;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
-    </style>
+   
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Bootstrap -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
+    @*Css Personales*@
+    <link href="~/Content/MyCssFiles/MyCssFile_1.css" rel="stylesheet" />
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title  GiveMePresent</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="back">
-    <div class="container body-content">
+<body>
+    <div class="right_col" role="main">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; Giveme a present</p>
-        </footer>
     </div>
+    @*<footer>
+            <p>&copy; Giveme a present</p>
+            <div class="clearfix"></div>
+        </footer>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <!-- Bootstrap -->
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.slim.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

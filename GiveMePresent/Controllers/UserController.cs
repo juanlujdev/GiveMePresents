@@ -4,10 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using DataAccess;
 namespace GiveMePresent.Controllers
 {
     public class UserController : Controller
     {
+        GivemePresentDBEntities db = new GivemePresentDBEntities();
+
         // GET: User
         public ActionResult Index()
         {
