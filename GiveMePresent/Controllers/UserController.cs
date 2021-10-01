@@ -24,13 +24,14 @@ namespace GiveMePresent.Controllers
         }
 
         // GET: User/Create
-        public ActionResult Create()
+        public ActionResult GetPVCreateUser()
         {
-            return View();
+            return PartialView("_PVCreateUser");
         }
 
         // POST: User/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(FormCollection collection)
         {
             try
@@ -89,14 +90,14 @@ namespace GiveMePresent.Controllers
             }
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        uow.Dispose();
-        //    }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
 
-        //    base.Dispose(disposing);
-        //}
+            base.Dispose(disposing);
+        }
     }
 }

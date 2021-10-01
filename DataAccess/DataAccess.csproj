@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\UserLoginDTO.cs" />
     <Compile Include="Gift.cs">
       <DependentUpon>GivemePresentDB.tt</DependentUpon>
     </Compile>

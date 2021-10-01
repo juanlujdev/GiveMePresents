@@ -1,0 +1,92 @@
+﻿@model DataAccess.DTOs.UserLoginDTO
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row justify-content-center pt-5 mt-5 mr-1">
+            <div class="col-md-4 personalForm">
+                <form action="">
+                    <div class="form-group text-center pt-3">
+                        <h1 class="text-light">INICIAR SESIÓN</h1>
+                    </div>
+                    <div class="form-group mx-sm-4 pt-3">
+                        <input name="email" type="text" class="form-control" placeholder="Ingrese su usuario" />
+                    </div>
+                    <div class="form-group mx-sm-4 pb-5">
+                        <input name="password" type="password" class="form-control" placeholder="Ingrese su contraseña" />
+                    </div>
+                    <div class="form-group mx-sm-4 pb-5">
+                        <input type="submit" class="btn btn-block personalButton " value="INGRESAR" />
+                    </div>
+                    <div class="text-center w-full text-danger">
+                        <i class="@ViewBag.Warning"></i> @ViewBag.LoginFail
+                    </div>
+                    <div class="form-group mx-sm-4 text-right">
+                        <span><a href="#" class="forgot">olvidé mi contraseña</a></span>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="x_content">
+                            <span><a data-toggle="modal" data-target="#new-modal" class="create" onclick="newUser()">Crear cuenta</a></span>
+                            <div class="modal fade" id="new-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content" id="new-User"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    const newModal = document.getElementById('new-User');
+
+    function newUser() {
+
+        console.log('Función dentro');
+
+
+        newModal.innerHTML = `<div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex justify-content-center my-2">
+                                    <div class="sk-chase">
+                                        <div class="sk-chase-dot"></div>
+                                        <div class="sk-chase-dot"></div>
+                                        <div class="sk-chase-dot"></div>
+                                        <div class="sk-chase-dot"></div>
+                                        <div class="sk-chase-dot"></div>
+                                        <div class="sk-chase-dot"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">&nbsp; Aceptar &nbsp; </button>
+                            </div>`;
+
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                newModal.innerHTML = xhttp.responseText;
+            }
+        }
+
+        xhttp.open('GET', '/User/GetPVCreateUser/');
+        xhttp.send();
+    }
+</script>
