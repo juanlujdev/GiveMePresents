@@ -110,7 +110,7 @@ advertencia 6002: La tabla o vista 'GivemePresentDB.dbo.Gift' no tiene definida 
           </Key>
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Gift" Relationship="Self.FK_Gift_User" FromRole="User" ToRole="Gift" />
         </EntityType>
