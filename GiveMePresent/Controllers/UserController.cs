@@ -5,11 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 
 using DataAccess;
+using DataAccess.Repository;
+
 namespace GiveMePresent.Controllers
 {
     public class UserController : Controller
     {
-        GivemePresentDBEntities db = new GivemePresentDBEntities();
+        UserRepository db = new UserRepository();
+        GivemePresentDBEntities aw = new GivemePresentDBEntities();
 
         // GET: User
         public ActionResult Index()
@@ -24,23 +27,29 @@ namespace GiveMePresent.Controllers
         }
 
         // GET: User/Create
-        public ActionResult GetPVCreateUser()
+        public ActionResult Create()
         {
-            return PartialView("_PVCreateUser");
+            return View();
         }
 
         // POST: User/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(User user)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                user.Date = DateTime.Now;
+                aw.User.Add(user);
+                aw.SaveChanges();
+                return RedirectToAction("Login", "Account");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
@@ -94,7 +103,7 @@ namespace GiveMePresent.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                aw.Dispose();
             }
 
             base.Dispose(disposing);

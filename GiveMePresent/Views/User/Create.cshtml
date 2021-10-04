@@ -1,0 +1,43 @@
+﻿@model DataAccess.User
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row justify-content-center pt-5 mt-5 mr-1">
+            <div class="col-md-4 personalForm">
+                <form action="">
+                    <div class="form-group text-center pt-3">
+                        <h1 class="text-light">Crear cuenta</h1>
+                    </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group mx-sm-4 pt-3">
+                        <input name="name" type="text" required class="form-control" placeholder="Ingrese su nombre" />
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                    <div class="form-group mx-sm-4 pt-3">
+                        <input name="email" type="email" required class="form-control" placeholder="Ingrese su email" />
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                    <div class="form-group mx-sm-4 pt-3">
+                        <input name="password" type="password" minLength=4 required class="form-control" placeholder="Ingrese su contraseña" />
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                    <div class="form-group text-center pt-5">
+                        <button class="create" type="submit">Crear usuario</button>
+                        @*<span><a type="submit" class="create">Crear usuario</a></span>*@
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+

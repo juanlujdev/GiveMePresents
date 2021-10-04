@@ -8,9 +8,12 @@ namespace DataAccess.Repository
 {
     public class UserRepository : IRepository<User>
     {
+        GivemePresentDBEntities context = new GivemePresentDBEntities();
+
         public void Add(User item)
         {
-            throw new NotImplementedException();
+            context.User.Add(item);
+            //throw new NotImplementedException();
         }
 
         public void Delete(User item)
@@ -47,5 +50,33 @@ namespace DataAccess.Repository
         {
             throw new NotImplementedException();
         }
+
+        public int Save()
+        {
+            return context.SaveChanges();
+        }
+
+        ////////////////////////////////////////////////////
+        // Implantación de IDisposable
+
+        //private bool disposedValue;
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (!disposedValue)
+        //    {
+        //        if (disposing)
+        //        {
+        //            context.Dispose();
+        //        }
+
+        //        disposedValue = true;
+        //    }
+        //}
+
+        //public void Dispose()
+        //{
+        //    Dispose(disposing: true);
+        //    GC.SuppressFinalize(this);
+        //}
     }
 }
