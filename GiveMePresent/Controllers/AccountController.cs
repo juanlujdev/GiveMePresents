@@ -5,14 +5,23 @@ using System.Web;
 using System.Web.Mvc;
 
 using DataAccess.DTOs;
+using GiveMePresent.Models;
+using Newtonsoft.Json;
 
 namespace GiveMePresent.Controllers
 {
     public class AccountController : Controller
     {
         // GET: Accounty
-        public ActionResult Login()
+        public ActionResult Login(string notification)
         {
+            //Notification notification = new Notification();
+            if (notification != null)
+            {
+                Notification notif = JsonConvert.DeserializeObject<Notification>(notification);
+                ViewBag.NType = notif.Type;
+                ViewBag.NMessage = notif.Message;
+            }
             return View();
         }
 

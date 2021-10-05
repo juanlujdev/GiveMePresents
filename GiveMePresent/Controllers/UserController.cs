@@ -6,13 +6,15 @@ using System.Web.Mvc;
 
 using DataAccess;
 using DataAccess.Repository;
+using GiveMePresent.Models;
+using Newtonsoft.Json;
 
 namespace GiveMePresent.Controllers
 {
     public class UserController : Controller
     {
-        UserRepository db = new UserRepository();
-        GivemePresentDBEntities aw = new GivemePresentDBEntities();
+        UserRepository repo = new UserRepository();
+        //GivemePresentDBEntities aw = new GivemePresentDBEntities();
 
         // GET: User
         public ActionResult Index()
@@ -35,23 +37,35 @@ namespace GiveMePresent.Controllers
         // POST: User/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(User user)
+        public ActionResult Create(User user, string badNotification)
         {
+            Notification notification = new Notification();
+            if (badNotification!=null)
+            {
+                Notification notif = JsonConvert.DeserializeObject<Notification>(badNotification);
+                ViewBag.NType = notif.Type;
+                ViewBag.NMessage = notif.Message;
+            }
             if (!ModelState.IsValid)
             {
                 return View(user);
             }
             try
             {
-                // TODO: Add insert logic here
                 user.Date = DateTime.Now;
-                aw.User.Add(user);
-                aw.SaveChanges();
-                return RedirectToAction("Login", "Account");
+                repo.Add(user);
+                repo.Save();
+                //aw.User.Add(user);
+                //aw.SaveChanges();
+                notification.Type = "customer-create";
+                notification.Message = "Usuario creado con éxito";
+                return RedirectToAction("Login", "Account", new { notification = JsonConvert.SerializeObject(notification) });
             }
             catch (Exception ex)
             {
-                return View();
+                notification.Type = "error";
+                notification.Message = "Se ha producido un fallo al procesar la petición. Prueba de nuevo y si el problema persiste contacta con el administrador";
+                return View(new { notification=JsonConvert.SerializeObject(notification)});
             }
         }
 
@@ -103,7 +117,7 @@ namespace GiveMePresent.Controllers
         {
             if (disposing)
             {
-                aw.Dispose();
+                repo.Dispose();
             }
 
             base.Dispose(disposing);

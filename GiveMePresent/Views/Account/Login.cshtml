@@ -40,3 +40,20 @@
         </div>
     </div>
 }
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var type ='@ViewBag.NType';
+        var message ='@ViewBag.NMessage';
+        console.log("type: "+type+" message: "+message);
+        if (type === null ||type==="" || message === null || message==="") {
+            toastr.error("text");
+        }
+        else {
+            toastr.success(message, "title", { "iconClass": type });
+        }
+    });
+
+    //Notificaciones
+
+</script>

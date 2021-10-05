@@ -59,24 +59,24 @@ namespace DataAccess.Repository
         ////////////////////////////////////////////////////
         // Implantación de IDisposable
 
-        //private bool disposedValue;
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!disposedValue)
-        //    {
-        //        if (disposing)
-        //        {
-        //            context.Dispose();
-        //        }
+        private bool disposedValue;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
 
-        //        disposedValue = true;
-        //    }
-        //}
+                disposedValue = true;
+            }
+        }
 
-        //public void Dispose()
-        //{
-        //    Dispose(disposing: true);
-        //    GC.SuppressFinalize(this);
-        //}
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

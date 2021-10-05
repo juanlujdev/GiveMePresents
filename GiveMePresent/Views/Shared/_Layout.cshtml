@@ -1,20 +1,25 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-   
+    <style>
+        #toast-container > .customer-create {
+            background-color: #6BB323;
+        }
+    </style>
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <!-- Bootstrap -->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
-    @*Css Personales*@
-    <link href="~/Content/MyCssFiles/MyCssFile_1.css" rel="stylesheet" />
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title  GiveMePresent</title>
+
+    <!-- Toast -->
+    <link href="~/Content/Toastr/toastr.min.css" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!--Css Personales-->
+    <link href="~/Content/MyCssFiles/MyCssFile_1.css" rel="stylesheet" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -31,9 +36,14 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap -->
-    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-    <script src="~/Scripts/jquery-3.6.0.slim.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <!-- Toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 </body>
 </html>
