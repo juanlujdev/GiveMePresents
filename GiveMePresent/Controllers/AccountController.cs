@@ -30,6 +30,10 @@ namespace GiveMePresent.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserLoginDTO userLogin)
         {
+            if (!string.IsNullOrWhiteSpace(userLogin.Email) && !string.IsNullOrWhiteSpace(userLogin.Password))
+            {
+                string hash=
+            }
             //TODO: poner en el layout el fontawesome y preparar estos viewbag x si no hay coincidencia de user.
             ViewBag.Warning = "fa fa-exclamation-triangle";
             ViewBag.LoginFail = "Usuario y/o contraseña incorrecto";
