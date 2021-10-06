@@ -41,10 +41,16 @@
     </div>
 }
 <script type="text/javascript">
-    //Notificaciones
-    @if (ViewBag.NType != null && ViewBag.NMessage != null)
-    {
-        @*@:const notification = new PNotify({ title: 'Notificación:', text: '@ViewBag.NMessage', type: '@ViewBag.NType', styling: 'bootstrap3' });*@
-    }
+    document.addEventListener('DOMContentLoaded', function () {
+
+        var type ='@ViewBag.NType';
+        var message = '@ViewBag.NMessage';
+        var title = '@ViewBag.NTitle';
+        console.log("type: "+type+" message: "+message);
+        if (type !== null && type!=="" && message !== null && message!=="" && title!==null && title!=="") {
+            toastr.success(message, title, { "iconClass": type });
+        }
+
+    });
 </script>
 

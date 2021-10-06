@@ -40,11 +40,12 @@ namespace GiveMePresent.Controllers
         public ActionResult Create(User user, string badNotification)
         {
             Notification notification = new Notification();
-            if (badNotification!=null)
+            if (badNotification != null)
             {
                 Notification notif = JsonConvert.DeserializeObject<Notification>(badNotification);
                 ViewBag.NType = notif.Type;
                 ViewBag.NMessage = notif.Message;
+                ViewBag.NTitle = notif.Title;
             }
             if (!ModelState.IsValid)
             {
@@ -59,13 +60,15 @@ namespace GiveMePresent.Controllers
                 //aw.SaveChanges();
                 notification.Type = "customer-create";
                 notification.Message = "Usuario creado con éxito";
+                notification.Title = "Usuario";
                 return RedirectToAction("Login", "Account", new { notification = JsonConvert.SerializeObject(notification) });
             }
             catch (Exception ex)
             {
-                notification.Type = "error";
+                notification.Type = "customer-error";
                 notification.Message = "Se ha producido un fallo al procesar la petición. Prueba de nuevo y si el problema persiste contacta con el administrador";
-                return View(new { notification=JsonConvert.SerializeObject(notification)});
+                notification.Title = "Error";
+                return View(new { notification = JsonConvert.SerializeObject(notification) });
             }
         }
 

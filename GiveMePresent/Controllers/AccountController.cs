@@ -21,6 +21,7 @@ namespace GiveMePresent.Controllers
                 Notification notif = JsonConvert.DeserializeObject<Notification>(notification);
                 ViewBag.NType = notif.Type;
                 ViewBag.NMessage = notif.Message;
+                ViewBag.NTitle = notif.Title;
             }
             return View();
         }
