@@ -27,13 +27,12 @@
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
 
                     <div class="form-group mx-sm-4 pt-3">
-                        <input name="password" type="password" minLength=4 required class="form-control" placeholder="Ingrese su contraseña" />
+                        <input name="password" type="password" minLength=4 maxlength=15 class="form-control" placeholder="Ingrese su contraseña" />
                     </div>
                     @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
 
                     <div class="form-group text-center pt-5">
                         <button class="create" type="submit">Crear usuario</button>
-                        @*<span><a type="submit" class="create">Crear usuario</a></span>*@
                     </div>
                 </form>
             </div>

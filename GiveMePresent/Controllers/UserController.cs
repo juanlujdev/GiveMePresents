@@ -61,15 +61,15 @@ namespace GiveMePresent.Controllers
                 notification.Type = "customer-create";
                 notification.Message = "Usuario creado con éxito";
                 notification.Title = "Usuario";
-                return RedirectToAction("Login", "Account", new { notification = JsonConvert.SerializeObject(notification) });
+                
             }
             catch (Exception ex)
             {
-                notification.Type = "customer-error";
-                notification.Message = "Se ha producido un fallo al procesar la petición. Prueba de nuevo y si el problema persiste contacta con el administrador";
-                notification.Title = "Error";
-                return View(new { notification = JsonConvert.SerializeObject(notification) });
+                notification.Type = "customer-warning";
+                notification.Message = "Usuario ya existe";
+                notification.Title = "Warning";
             }
+            return RedirectToAction("Login", "Account", new { notification = JsonConvert.SerializeObject(notification) });
         }
 
         // GET: User/Edit/5
