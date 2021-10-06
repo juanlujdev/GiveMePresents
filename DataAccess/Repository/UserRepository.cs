@@ -36,6 +36,15 @@ namespace DataAccess.Repository
             throw new NotImplementedException();
         }
 
+        public User Get(string password, string email)
+        {
+            User user = (from u in context.User
+                         where u.Password == password && u.Email == email
+                         select u).FirstOrDefault();
+
+            return user;
+        }
+
         public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();

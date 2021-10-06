@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using DataAccess;
 using DataAccess.Repository;
+using GiveMePresent.Common;
 using GiveMePresent.Models;
 using Newtonsoft.Json;
 
@@ -54,10 +55,9 @@ namespace GiveMePresent.Controllers
             try
             {
                 user.Date = DateTime.Now;
+                user.Password=Tools.SHA256_Encrypt_hex(user.Password);
                 repo.Add(user);
                 repo.Save();
-                //aw.User.Add(user);
-                //aw.SaveChanges();
                 notification.Type = "customer-create";
                 notification.Message = "Usuario creado con éxito";
                 notification.Title = "Usuario";
