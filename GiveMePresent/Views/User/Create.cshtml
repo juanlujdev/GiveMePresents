@@ -26,10 +26,13 @@
                     </div>
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
 
-                    <div class="form-group mx-sm-4 pt-3">
-                        <input name="password" type="password" minLength=4 maxlength=15 class="form-control" placeholder="Ingrese su contraseña" />
+                    <div class="input-group mx-sm-4 pt-3">
+                        <input name="password" id="pass" type="password" title="Contraseña máximo 15 caracteres" minLength=4 maxlength=15 class="form-control" placeholder="Ingrese su contraseña" />
                     </div>
                     @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    <div class="ml-4 mt-3">
+                        <input type="checkbox" onclick="showPassword()" id="check"> &nbsp; Mostrar contraseña
+                    </div>
 
                     <div class="form-group text-center pt-5">
                         <button class="create" type="submit">Crear usuario</button>
@@ -51,5 +54,16 @@
         }
 
     });
+
+    function showPassword() {
+        var pass = document.getElementById("pass");
+        var check = document.getElementById("check").checked;
+        if (check===true) {
+            pass.type = "text";
+        }
+        else {
+            pass.type = "password";
+        }
+    }
 </script>
 
