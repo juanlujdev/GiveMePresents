@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using System.Web.Security;
 using DataAccess;
 using DataAccess.DTOs;
 using DataAccess.Repository;
@@ -17,6 +18,7 @@ namespace GiveMePresent.Controllers
     {
         UserRepository repo = new UserRepository();
 
+        
         // GET: Accounty
         public ActionResult Login(string notification)
         {
@@ -40,9 +42,8 @@ namespace GiveMePresent.Controllers
             if (!string.IsNullOrWhiteSpace(userLogin.Email) && !string.IsNullOrWhiteSpace(userLogin.Password))
             {
                 string hash = Tools.SHA256_Encrypt_hex(userLogin.Password);
-                user = repo.Get(userLogin.Password, userLogin.Email);
+                user = repo.Get(hash, userLogin.Email);
             }
-            //TODO: poner en el layout el fontawesome y preparar estos viewbag x si no hay coincidencia de user.
 
             if (user == null)
             {
@@ -52,9 +53,9 @@ namespace GiveMePresent.Controllers
             }
             else
             {
-                //TODO: tener la sesion logueadapara poder pasar entre las diferentes pantalla logueado.
+                FormsAuthentication.SetAuthCookie(user.Email, false);
+                return RedirectToAction("Index", "Gift");
             }
-            return null;
         }
     }
 }
