@@ -151,6 +151,8 @@
     <Content Include="Content\Toastr\toastr.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Fonts\Images\regaloHome2.jpg" />
+    <Content Include="Fonts\Images\regalo_hecho.jpg" />
+    <Content Include="Fonts\Images\regalo_recibido2.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />

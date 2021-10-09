@@ -57,5 +57,11 @@ namespace GiveMePresent.Controllers
                 return RedirectToAction("Index", "Gift");
             }
         }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index","Home");
+        }
     }
 }
