@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using System.Web.Helpers;
+using DataAccess;
+
 namespace GiveMePresent.Controllers
 {
 
@@ -17,6 +20,15 @@ namespace GiveMePresent.Controllers
         }
         public ActionResult Create()
         {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Gift gift, string Nombre)
+        {
+            HttpPostedFileBase fileBase = Request.Files[0];
+            WebImage image = new WebImage(fileBase.InputStream);
+            gift.PresentIMG = image.GetBytes();
             return View();
         }
     }
