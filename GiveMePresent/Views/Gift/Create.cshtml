@@ -54,7 +54,7 @@
                 <div class="form-group">
                     @Html.Label("Link Regalo", htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.PresentLink, new { htmlAttributes = new { @class = "form-control", title = "Link donde podrá ver el regalo", type="url" } })
+                        @Html.EditorFor(model => model.PresentLink, new { htmlAttributes = new { @class = "form-control", title = "Link donde podrá ver el regalo", type = "url" } })
                         @Html.ValidationMessageFor(model => model.PresentLink, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -64,21 +64,17 @@
                         @Html.Editor("Nombre", new { htmlAttributes = new { @class = "form-control", title = "Nombre de la persona que recibirá el regalo", @required = "required" } })
                     </div>
                 </div>
+                    <div class="form-group mx-sm-4 mt-5">
+                        <input type="submit" class="btn btn-block personalButton " value="Enviar" />
+                    </div>
             </div>
         </div>
     </div>
 
 
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
+
 }
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 <link href="~/Content/datetimepicker-master/jquery.datetimepicker.css" rel="stylesheet" />
 <script src="~/Content/datetimepicker-master/jquery.js"></script>
 <script src="~/Content/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
