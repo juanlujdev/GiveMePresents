@@ -31,9 +31,9 @@
 </head>
 <body>
     <div class="row justify-content-start mx-3">
-        
-            <h3 style="color: #FEE8C5">Bienvenido @User.Identity.Name</h3>
-            <a href="@Url.Action("LogOut", "Account")" title="Log-out"><i class="fa fa-power-off fa-1x" style="color:grey; background-color:darkred; border-radius: 20px; "></i></a>
+
+        <h3 style="color: #FEE8C5">Bienvenido @User.Identity.Name</h3>
+        <a href="@Url.Action("LogOut", "Account")" title="Log-out"><i class="fa fa-power-off fa-1x" style="color:grey; background-color:darkred; border-radius: 20px; "></i></a>
 
     </div>
     <div class="right_col" role="main">
@@ -55,6 +55,10 @@
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <!-- Toastr -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+    <!--Css datetimepicker-->
+    <link href="~/Content/datetimepicker-master/jquery.datetimepicker.css" rel="stylesheet" />
+    <!--datetimepicker-->
+    <script src="~/Content/datetimepicker-master/jquery.js"></script>
+    <script src="~/Content/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
 </body>
 </html>

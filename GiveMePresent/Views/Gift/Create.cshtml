@@ -79,3 +79,12 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+<link href="~/Content/datetimepicker-master/jquery.datetimepicker.css" rel="stylesheet" />
+<script src="~/Content/datetimepicker-master/jquery.js"></script>
+<script src="~/Content/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+<script>
+    jQuery('#DateDelivery').datetimepicker({
+        step: 30,
+        theme: 'dark'
+    });
+</script>
