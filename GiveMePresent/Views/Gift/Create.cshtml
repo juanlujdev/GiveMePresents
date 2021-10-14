@@ -16,7 +16,7 @@
                 <div class="form-group">
                     @Html.Label("Nombre regalo*", htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", title="Nombre del regalo",@required="required"}})
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", title = "Nombre del regalo", @required = "required" } })
                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -24,14 +24,14 @@
                     @Html.Label("Imagen", htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.PresentIMG, new { htmlAttributes = new { @class = "form-control" } })
-                       <input type="file" name="ImageLoad"  title="Sube la imagen del regalo"/>
+                        <input type="file" name="ImageLoad" title="Sube la imagen del regalo" />
                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.Label("Email quien recibe regalo*", htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.GiftedPersonEmail, new { htmlAttributes = new { @class = "form-control", title = "Email de la persona que recibe el regalo", @required = "required", type="email"} })
+                        @Html.EditorFor(model => model.GiftedPersonEmail, new { htmlAttributes = new { @class = "form-control", title = "Email de la persona que recibe el regalo", @required = "required", type = "email" } })
                         @Html.ValidationMessageFor(model => model.GiftedPersonEmail, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -64,23 +64,19 @@
                         @Html.Editor("Nombre", new { htmlAttributes = new { @class = "form-control", title = "Nombre de la persona que recibirá el regalo", @required = "required" } })
                     </div>
                 </div>
-                    <div class="form-group mx-sm-4 mt-5">
-                        <input type="submit" class="btn btn-block personalButton " value="Enviar" />
-                    </div>
+                <div class="form-group mx-sm-4 mt-5 ">
+                    <input type="submit" class="btn btn-warning btn-lg btn-block" style="background-color: #E59C4C;color:white; height: 75px; width: 260px" value="Enviar">
+                </div>
             </div>
         </div>
     </div>
-
-
-
-
 }
-<link href="~/Content/datetimepicker-master/jquery.datetimepicker.css" rel="stylesheet" />
-<script src="~/Content/datetimepicker-master/jquery.js"></script>
-<script src="~/Content/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
-<script>
-    jQuery('#DateDelivery').datetimepicker({
-        step: 30,
-        theme: 'dark'
-    });
-</script>
+
+@section Scripts {
+    <script type="text/javascript">
+        jQuery('#DateDelivery').datetimepicker({
+            step: 30,
+            theme: 'dark'
+        });
+    </script>
+}

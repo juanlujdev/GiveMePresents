@@ -25,6 +25,8 @@
     <link href="~/Content/Fontawesome/css/font-awesome.min.css" rel="stylesheet" />
     <!--Css Personales-->
     <link href="~/Content/MyCssFiles/MyCssFile_1.css" rel="stylesheet" />
+    <!--Css datetimepicker-->
+    <link href="~/Content/datetimepicker-master/jquery.datetimepicker.css" rel="stylesheet" />
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -46,7 +48,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 
     <!-- jQuery -->
     <script src="~/Scripts/jquery-3.6.0.min.js"></script>
@@ -55,10 +56,10 @@
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <!-- Toastr -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <!--Css datetimepicker-->
-    <link href="~/Content/datetimepicker-master/jquery.datetimepicker.css" rel="stylesheet" />
     <!--datetimepicker-->
     <script src="~/Content/datetimepicker-master/jquery.js"></script>
     <script src="~/Content/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>

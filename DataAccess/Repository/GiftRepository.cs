@@ -8,10 +8,25 @@ namespace DataAccess.Repository
 {
     public class GiftRepository : IRepository<Gift>
     {
+        GivemePresentDBEntities context = new GivemePresentDBEntities();
 
         public void Add(Gift item)
         {
-            throw new NotImplementedException();
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    context.Gift.Add(item);
+                    Save();
+                    transaction.Commit();
+                    //TODO: en tools esta implemtado el envio de emails. probarlo
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                }
+
+            }
         }
 
         public void Delete(Gift item)
@@ -47,6 +62,34 @@ namespace DataAccess.Repository
         public void Update(Gift item)
         {
             throw new NotImplementedException();
+        }
+
+        public int Save()
+        {
+            return context.SaveChanges();
+        }
+
+        ////////////////////////////////////////////////////
+        // Implantación de IDisposable
+
+        private bool disposedValue;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }
