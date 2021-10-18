@@ -23,9 +23,9 @@
                 <div class="form-group">
                     @Html.Label("Imagen", htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.PresentIMG, new { htmlAttributes = new { @class = "form-control" } })
+                        @*@Html.EditorFor(model => model.PresentIMG, new { htmlAttributes = new { @class = "form-control" } })*@
                         <input type="file" name="ImageLoad" title="Sube la imagen del regalo" />
-                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.PresentIMG, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">

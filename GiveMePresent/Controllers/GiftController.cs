@@ -39,16 +39,24 @@ namespace GiveMePresent.Controllers
         public ActionResult Create(Gift gift, string Nombre)
         {
             GiftedPerson gifted = new GiftedPerson();
+
             HttpPostedFileBase fileBase = Request.Files[0];
-            if (!ModelState.IsValid)
+
+            if (fileBase.FileName.EndsWith(".jpg"))
             {
+
+                WebImage image = new WebImage(fileBase.InputStream);
+                gift.PresentIMG = image.GetBytes();
+            }
+            else
+            {
+                ModelState.AddModelError("PresentIMG", "El sistema unicamente acepta imagenes con formato jpg.");
                 return View(gift);
             }
 
-            if (gift.PresentIMG != null)
+            if (!ModelState.IsValid)
             {
-                WebImage image = new WebImage(fileBase.InputStream);
-                gift.PresentIMG = image.GetBytes();
+                return View(gift);
             }
 
             Notification notification = new Notification();
