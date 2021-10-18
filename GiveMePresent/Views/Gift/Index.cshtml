@@ -19,3 +19,16 @@
         <a href="#"><img src="~/Fonts/Images/regalo_recibido2.jpg" class="card-img-top" alt="..."></a>
     </div>
 </div>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var type ='@ViewBag.NType';
+        var message = '@ViewBag.NMessage';
+        var title = '@ViewBag.NTitle';
+        console.log("type: "+type+" message: "+message);
+        if (type !== null && type!=="" && message !== null && message!=="" && title!==null && title!=="") {
+            toastr.success(message, title, { "iconClass": type });
+        }
+    });
+
+</script>

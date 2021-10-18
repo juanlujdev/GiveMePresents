@@ -9,6 +9,7 @@ using DataAccess;
 using DataAccess.Repository;
 using GiveMePresent.Common;
 using GiveMePresent.Models;
+using Newtonsoft.Json;
 
 namespace GiveMePresent.Controllers
 {
@@ -18,8 +19,15 @@ namespace GiveMePresent.Controllers
         GiftRepository repo = new GiftRepository();
         GiftedPersonRepository repoPerson = new GiftedPersonRepository();
         // GET: Gift
-        public ActionResult Index()
+        public ActionResult Index(string notification)
         {
+            if (notification != null)
+            {
+                Notification notif = JsonConvert.DeserializeObject<Notification>(notification);
+                ViewBag.NType = notif.Type;
+                ViewBag.NMessage = notif.Message;
+                ViewBag.NTitle = notif.Title;
+            }
             return View();
         }
         public ActionResult Create()
@@ -55,6 +63,7 @@ namespace GiveMePresent.Controllers
             try
             {
                 repoPerson.Add(gifted);
+                repoPerson.Save();
                 repo.Add(gift);
                 repo.Save();
 
@@ -71,7 +80,7 @@ namespace GiveMePresent.Controllers
                 notification.Message = "No se ha podido mandar el regalo intentelo de nuevo";
                 notification.Title = "Warning";
             }
-            return View();
+            return RedirectToAction("Index", "Gift", new { notification = JsonConvert.SerializeObject(notification) });
         }
 
 
