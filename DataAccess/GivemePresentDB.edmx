@@ -116,11 +116,11 @@ advertencia 6002: La tabla o vista 'GivemePresentDB.dbo.Gift' no tiene definida 
         </EntityType>
         <EntityType Name="Gift">
           <Key>
-            <PropertyRef Name="IdPresent" />
             <PropertyRef Name="Name" />
             <PropertyRef Name="DateDelivery" />
             <PropertyRef Name="UserEmail" />
             <PropertyRef Name="GiftedPersonEmail" />
+            <PropertyRef Name="IdPresent" />
           </Key>
           <Property Name="IdPresent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />

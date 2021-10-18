@@ -37,7 +37,7 @@ namespace GiveMePresent.Common
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        private bool SendEmail(string userEmail, string personaContacto)
+        public static bool SendEmail(string userEmail, string personaContacto)
         {
             bool check;
             string subject = "Hola " + personaContacto + " este es tu usuario y contraseña";

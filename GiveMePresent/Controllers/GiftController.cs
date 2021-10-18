@@ -8,6 +8,7 @@ using System.Web.Helpers;
 using DataAccess;
 using DataAccess.Repository;
 using GiveMePresent.Common;
+using GiveMePresent.Models;
 
 namespace GiveMePresent.Controllers
 {
@@ -29,16 +30,51 @@ namespace GiveMePresent.Controllers
         public ActionResult Create(Gift gift, string Nombre)
         {
             HttpPostedFileBase fileBase = Request.Files[0];
-            WebImage image = new WebImage(fileBase.InputStream);
+            if (!ModelState.IsValid)
+            {
+                return View(gift);
+            }
 
-            gift.PresentIMG = image.GetBytes();
+            if (gift.PresentIMG != null)
+            {
+                WebImage image = new WebImage(fileBase.InputStream);
+                gift.PresentIMG = image.GetBytes();
+            }
+
+            Notification notification = new Notification();
+
             gift.DateEntry = DateTime.Now;
             gift.UserEmail = User.Identity.Name;
             gift.CodIdf = Tools.RandomString();
-            gift.GiftedPerson.Name = Nombre;
-            gift.GiftedPerson.Email = gift.GiftedPersonEmail;
+            //gift.GiftedPerson.Name = Nombre;
+            //gift.GiftedPerson.Email = gift.GiftedPersonEmail;
 
-            repo.Add(gift);
+            try
+            {
+                //TODO: probar en valencia el envio de correos
+                //bool check = Tools.SendEmail(email, name);
+                repo.Add(gift);
+                repo.Save();
+                try
+                {
+
+                    notification.Type = "customer-create";
+                    notification.Message = "Regalo creado y Email enviado con éxito";
+                    notification.Title = "Regalo";
+                }
+                catch (Exception ex)
+                {
+                    notification.Type = "customer-warning";
+                    notification.Message = "No se ha podido mandar el regalo intentelo de nuevo";
+                    notification.Title = "Warning";
+                }
+            }
+            catch (Exception ex)
+            {
+                notification.Type = "customer-warning";
+                notification.Message = "No se ha podido mandar el regalo intentelo de nuevo";
+                notification.Title = "Warning";
+            }
             return View();
         }
 

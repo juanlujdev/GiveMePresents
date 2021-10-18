@@ -12,21 +12,7 @@ namespace DataAccess.Repository
 
         public void Add(Gift item)
         {
-            using (var transaction = context.Database.BeginTransaction())
-            {
-                try
-                {
-                    context.Gift.Add(item);
-                    Save();
-                    transaction.Commit();
-                    //TODO: en tools esta implemtado el envio de emails. probarlo
-                }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-                }
-
-            }
+            context.Gift.Add(item);
         }
 
         public void Delete(Gift item)
