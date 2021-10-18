@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class GiftedPersonRepository : IRepository<GiftedPersonRepository>
+    public class GiftedPersonRepository : IRepository<GiftedPerson>
     {
-        public void Add(GiftedPersonRepository item)
-        {
-            throw new NotImplementedException();
-        }
+        GivemePresentDBEntities context = new GivemePresentDBEntities();
 
-        public void Delete(GiftedPersonRepository item)
+        public void Add(GiftedPerson item)
         {
-            throw new NotImplementedException();
+            context.GiftedPerson.Add(item);
         }
 
         public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(GiftedPerson item)
         {
             throw new NotImplementedException();
         }
@@ -28,12 +30,12 @@ namespace DataAccess.Repository
             throw new NotImplementedException();
         }
 
-        public GiftedPersonRepository Get(int id)
+        public GiftedPerson Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<GiftedPersonRepository> GetAll()
+        public IEnumerable<GiftedPerson> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -46,6 +48,39 @@ namespace DataAccess.Repository
         public void Update(GiftedPersonRepository item)
         {
             throw new NotImplementedException();
+        }
+
+        public void Update(GiftedPerson item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Save()
+        {
+            return context.SaveChanges();
+        }
+
+        ////////////////////////////////////////////////////
+        // Implantación de IDisposable
+
+        private bool disposedValue;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

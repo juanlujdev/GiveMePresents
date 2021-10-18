@@ -16,6 +16,7 @@ namespace GiveMePresent.Controllers
     public class GiftController : Controller
     {
         GiftRepository repo = new GiftRepository();
+        GiftedPersonRepository repoPerson = new GiftedPersonRepository();
         // GET: Gift
         public ActionResult Index()
         {
@@ -29,6 +30,7 @@ namespace GiveMePresent.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Gift gift, string Nombre)
         {
+            GiftedPerson gifted = new GiftedPerson();
             HttpPostedFileBase fileBase = Request.Files[0];
             if (!ModelState.IsValid)
             {
@@ -43,16 +45,18 @@ namespace GiveMePresent.Controllers
 
             Notification notification = new Notification();
 
+            gifted.Email = gift.GiftedPersonEmail;
+            gifted.Name = Nombre;
+            
             gift.DateEntry = DateTime.Now;
             gift.UserEmail = User.Identity.Name;
             gift.CodIdf = Tools.RandomString();
-            //gift.GiftedPerson.Name = Nombre;
-            //gift.GiftedPerson.Email = gift.GiftedPersonEmail;
 
             try
             {
                 //TODO: probar en valencia el envio de correos
                 //bool check = Tools.SendEmail(email, name);
+                repoPerson.Add(gifted);
                 repo.Add(gift);
                 repo.Save();
                 try

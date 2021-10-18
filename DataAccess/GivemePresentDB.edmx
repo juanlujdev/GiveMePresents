@@ -5,15 +5,9 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GivemePresentDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'GivemePresentDB.dbo.Gift' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Gift">
           <Key>
             <PropertyRef Name="IdPresent" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="DateDelivery" />
-            <PropertyRef Name="UserEmail" />
-            <PropertyRef Name="GiftedPersonEmail" />
           </Key>
           <Property Name="IdPresent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
@@ -67,22 +61,9 @@ advertencia 6002: La tabla o vista 'GivemePresentDB.dbo.Gift' no tiene definida 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="GivemePresentDBModelStoreContainer">
+          <EntitySet Name="Gift" EntityType="Self.Gift" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GiftedPerson" EntityType="Self.GiftedPerson" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Gift" EntityType="Self.Gift" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Gift].[IdPresent] AS [IdPresent], 
-    [Gift].[Name] AS [Name], 
-    [Gift].[Message] AS [Message], 
-    [Gift].[DateDelivery] AS [DateDelivery], 
-    [Gift].[DateEntry] AS [DateEntry], 
-    [Gift].[PresentIMG] AS [PresentIMG], 
-    [Gift].[PresentLink] AS [PresentLink], 
-    [Gift].[UserEmail] AS [UserEmail], 
-    [Gift].[GiftedPersonEmail] AS [GiftedPersonEmail], 
-    [Gift].[CodIdf] AS [CodIdf]
-    FROM [dbo].[Gift] AS [Gift]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Gift_GiftedPerson1" Association="Self.FK_Gift_GiftedPerson1">
             <End Role="GiftedPerson" EntitySet="GiftedPerson" />
             <End Role="Gift" EntitySet="Gift" />
@@ -102,7 +83,7 @@ advertencia 6002: La tabla o vista 'GivemePresentDB.dbo.Gift' no tiene definida 
           </Key>
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Gift" Relationship="Self.FK_Gift_GiftedPerson1" FromRole="GiftedPerson" ToRole="Gift" />
+          <NavigationProperty Name="Gift" Relationship="GivemePresentDBModel.FK_Gift_GiftedPerson1" FromRole="GiftedPerson" ToRole="Gift" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -112,32 +93,41 @@ advertencia 6002: La tabla o vista 'GivemePresentDB.dbo.Gift' no tiene definida 
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" FixedLength="false" Unicode="false" MaxLength="Max" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Gift" Relationship="Self.FK_Gift_User" FromRole="User" ToRole="Gift" />
+          <NavigationProperty Name="Gift" Relationship="GivemePresentDBModel.FK_Gift_User" FromRole="User" ToRole="Gift" />
         </EntityType>
+        <EntityContainer Name="GivemePresentDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GiftedPerson" EntityType="Self.GiftedPerson" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="Gift" EntityType="GivemePresentDBModel.Gift" />
+          <AssociationSet Name="FK_Gift_GiftedPerson1" Association="GivemePresentDBModel.FK_Gift_GiftedPerson1">
+            <End Role="GiftedPerson" EntitySet="GiftedPerson" />
+            <End Role="Gift" EntitySet="Gift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gift_User" Association="GivemePresentDBModel.FK_Gift_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Gift" EntitySet="Gift" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Gift">
           <Key>
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="DateDelivery" />
-            <PropertyRef Name="UserEmail" />
-            <PropertyRef Name="GiftedPersonEmail" />
             <PropertyRef Name="IdPresent" />
           </Key>
           <Property Name="IdPresent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Message" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
           <Property Name="DateDelivery" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateEntry" Type="DateTime" Precision="0" />
           <Property Name="PresentIMG" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="PresentLink" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="GiftedPersonEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GiftedPersonEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CodIdf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GiftedPerson" Relationship="Self.FK_Gift_GiftedPerson1" FromRole="Gift" ToRole="GiftedPerson" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Gift_User" FromRole="Gift" ToRole="User" />
+          <NavigationProperty Name="GiftedPerson" Relationship="GivemePresentDBModel.FK_Gift_GiftedPerson1" FromRole="Gift" ToRole="GiftedPerson" />
+          <NavigationProperty Name="User" Relationship="GivemePresentDBModel.FK_Gift_User" FromRole="Gift" ToRole="User" />
         </EntityType>
         <Association Name="FK_Gift_GiftedPerson1">
-          <End Role="GiftedPerson" Type="Self.GiftedPerson" Multiplicity="1" />
-          <End Role="Gift" Type="Self.Gift" Multiplicity="*" />
+          <End Type="GivemePresentDBModel.GiftedPerson" Role="GiftedPerson" Multiplicity="1" />
+          <End Type="GivemePresentDBModel.Gift" Role="Gift" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GiftedPerson">
               <PropertyRef Name="Email" />
@@ -148,8 +138,8 @@ advertencia 6002: La tabla o vista 'GivemePresentDB.dbo.Gift' no tiene definida 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Gift_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Gift" Type="Self.Gift" Multiplicity="*" />
+          <End Type="GivemePresentDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="GivemePresentDBModel.Gift" Role="Gift" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Email" />
@@ -159,19 +149,6 @@ advertencia 6002: La tabla o vista 'GivemePresentDB.dbo.Gift' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="GivemePresentDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="GiftedPerson" EntityType="Self.GiftedPerson" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="Gift" EntityType="Self.Gift" />
-          <AssociationSet Name="FK_Gift_GiftedPerson1" Association="Self.FK_Gift_GiftedPerson1">
-            <End Role="GiftedPerson" EntitySet="GiftedPerson" />
-            <End Role="Gift" EntitySet="Gift" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Gift_User" Association="Self.FK_Gift_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Gift" EntitySet="Gift" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -199,16 +176,16 @@ advertencia 6002: La tabla o vista 'GivemePresentDB.dbo.Gift' no tiene definida 
           <EntitySetMapping Name="Gift">
             <EntityTypeMapping TypeName="GivemePresentDBModel.Gift">
               <MappingFragment StoreEntitySet="Gift">
-                <ScalarProperty Name="IdPresent" ColumnName="IdPresent" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="DateDelivery" ColumnName="DateDelivery" />
-                <ScalarProperty Name="DateEntry" ColumnName="DateEntry" />
-                <ScalarProperty Name="PresentIMG" ColumnName="PresentIMG" />
-                <ScalarProperty Name="PresentLink" ColumnName="PresentLink" />
-                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-                <ScalarProperty Name="GiftedPersonEmail" ColumnName="GiftedPersonEmail" />
                 <ScalarProperty Name="CodIdf" ColumnName="CodIdf" />
+                <ScalarProperty Name="GiftedPersonEmail" ColumnName="GiftedPersonEmail" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="PresentLink" ColumnName="PresentLink" />
+                <ScalarProperty Name="PresentIMG" ColumnName="PresentIMG" />
+                <ScalarProperty Name="DateEntry" ColumnName="DateEntry" />
+                <ScalarProperty Name="DateDelivery" ColumnName="DateDelivery" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdPresent" ColumnName="IdPresent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
