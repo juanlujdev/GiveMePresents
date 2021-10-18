@@ -47,31 +47,23 @@ namespace GiveMePresent.Controllers
 
             gifted.Email = gift.GiftedPersonEmail;
             gifted.Name = Nombre;
-            
+
             gift.DateEntry = DateTime.Now;
             gift.UserEmail = User.Identity.Name;
             gift.CodIdf = Tools.RandomString();
 
             try
             {
-                //TODO: probar en valencia el envio de correos
-                //bool check = Tools.SendEmail(email, name);
                 repoPerson.Add(gifted);
                 repo.Add(gift);
                 repo.Save();
-                try
-                {
 
-                    notification.Type = "customer-create";
-                    notification.Message = "Regalo creado y Email enviado con éxito";
-                    notification.Title = "Regalo";
-                }
-                catch (Exception ex)
-                {
-                    notification.Type = "customer-warning";
-                    notification.Message = "No se ha podido mandar el regalo intentelo de nuevo";
-                    notification.Title = "Warning";
-                }
+                bool check = Tools.SendEmail(gift.GiftedPersonEmail, Nombre, gift.CodIdf, gift.UserEmail);
+
+                notification.Type = "customer-create";
+                notification.Message = "Regalo creado y Email enviado con éxito";
+                notification.Title = "Regalo";
+
             }
             catch (Exception ex)
             {
